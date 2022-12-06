@@ -2,15 +2,15 @@
 
 function d_merge(xs, ys) {
     const empty_list = list();
-    const full_list = append(xs, ys);
     const og_list = append(xs, ys);
     function merging(lists, counter) {
-        return counter === ((length(og_list) + 1) / 2) - 1
+        return counter === math_round(length(og_list) / 2)
         ? lists
         : length(og_list) % 2 === 0
         ? append(lists, merging(append(list(list_ref(og_list, counter)), 
         list(list_ref(og_list, ((length(og_list) / 2) + counter)))), counter + 1))
-
+        : counter === (length(og_list) - 1) / 2
+        ? append(lists, merging(list(list_ref(og_list, counter)), counter + 1))
         : append(lists, merging(append(list(list_ref(og_list, counter)), 
         list(list_ref(og_list, (((length(og_list) + 1) / 2) + counter)))), counter + 1));
         }
